@@ -53,19 +53,20 @@ Query 1: Count of Movies Released Between 1991 and 2000
 
 Question: How many movies were released between 1991 and 2000 (inclusive) on Netflix?
 
-SELECT
+```SELECT
     COUNT(type)
 FROM
     shows
 WHERE
     (release_year BETWEEN 1991 AND 2000) AND type = 'Movie';
-
+```
 (Insert screenshot of Query 1 results here)
 The normalized database schema simplifies complex analytical queries.
 Query 2: TV Shows with the Maximum Number of Seasons
 
 Question: Show the title, associated countries, listed genres, and seasons for TV shows that ran the longest (i.e., have the most seasons).
 
+```
 SELECT
     s.title,
     GROUP_CONCAT(DISTINCT c.country_name SEPARATOR ', ') AS countries,
@@ -86,12 +87,12 @@ WHERE
     AND s.seasons IN (SELECT MAX(seasons) FROM shows WHERE type = 'TV Show')
 GROUP BY
     s.show_id, s.title, s.seasons;
-
+```
 (Insert screenshot of Query 2 results here)
 Query 3: Top 10 Cast Members by Number of Titles
 
 Question: Show the name of each cast member and the number of titles (movies or TV shows) where they were a cast member, for the top 10 cast members based on the number of titles.
-
+```
 SELECT
     cm.cast_member_name AS cast_member,
     COUNT(scm.show_id) AS number_of_titles
@@ -104,12 +105,12 @@ GROUP BY
 ORDER BY
     number_of_titles DESC
 LIMIT 10;
-
+```
 (Insert screenshot of Query 3 results here)
 Query 4: Movies where Director is also a Cast Member
 
 Question: Show the title of the movies and the name(s) of the director(s) who also appeared as cast member(s) in that same movie.
-
+```
 SELECT
     s.title,
     GROUP_CONCAT(DISTINCT d.director_name) AS director_who_is_also_cast
@@ -128,7 +129,7 @@ WHERE
     AND d.director_name = cm.cast_member_name
 GROUP BY
     s.title;
-
+```
 (Insert screenshot of Query 4 results here)
 6. Key Learnings & Challenges
 
