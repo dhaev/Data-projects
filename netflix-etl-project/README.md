@@ -28,8 +28,9 @@ Achieved Third Normal Form (3NF) by:
     Establishing many-to-many relationships between the main shows table (fact table) and dimension tables using dedicated fact tables (e.g., show_directors, show_cast_members).
 
 Schema Visualization (ERD):
+![netflix_show_info](https://github.com/user-attachments/assets/4e0534c6-45de-4fec-b135-6511f7265ea6)
 
-(Add a brief caption for the ERD, e.g., "Entity-Relationship Diagram of the Normalized Netflix Database Schema")
+
 4. ETL (Extract, Transform, Load) Pipeline
 
 A Python script (netflix-etl-mysql.py) automates the ETL process, loading data from netflix_shows_info.csv into the normalized MySQL database.
@@ -60,7 +61,8 @@ FROM
 WHERE
     (release_year BETWEEN 1991 AND 2000) AND type = 'Movie';
 ```
-(Insert screenshot of Query 1 results here)
+![netflix-show-q1](https://github.com/user-attachments/assets/015ce6ad-e2e6-4508-9b6b-207939a70849)
+
 The normalized database schema simplifies complex analytical queries.
 Query 2: TV Shows with the Maximum Number of Seasons
 
@@ -88,7 +90,8 @@ WHERE
 GROUP BY
     s.show_id, s.title, s.seasons;
 ```
-(Insert screenshot of Query 2 results here)
+![netflix-show-q2](https://github.com/user-attachments/assets/e8aef435-1324-4403-8838-c4836080dd64)
+
 Query 3: Top 10 Cast Members by Number of Titles
 
 Question: Show the name of each cast member and the number of titles (movies or TV shows) where they were a cast member, for the top 10 cast members based on the number of titles.
@@ -106,7 +109,8 @@ ORDER BY
     number_of_titles DESC
 LIMIT 10;
 ```
-(Insert screenshot of Query 3 results here)
+![netflix-show-q3](https://github.com/user-attachments/assets/0539c784-430c-4788-b90d-6d600af5d151)
+
 Query 4: Movies where Director is also a Cast Member
 
 Question: Show the title of the movies and the name(s) of the director(s) who also appeared as cast member(s) in that same movie.
@@ -130,7 +134,8 @@ WHERE
 GROUP BY
     s.title;
 ```
-(Insert screenshot of Query 4 results here)
+![netflix-show-q4](https://github.com/user-attachments/assets/28e3f62a-c548-41d7-ace7-8a4c94777050)
+
 6. Key Learnings & Challenges
 
 This project provided valuable experience in building a robust data pipeline and highlighted the importance of a well-designed database schema.
