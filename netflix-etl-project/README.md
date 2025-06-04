@@ -27,88 +27,12 @@ Achieved Third Normal Form (3NF) by:
 
     Establishing many-to-many relationships between the main shows table (fact table) and dimension tables using dedicated fact tables (e.g., show_directors, show_cast_members).
 
-New Schema (SQL DDL):
-
--- Create the main content table, renamed to 'shows'
-CREATE TABLE shows (
-    show_id VARCHAR(255) PRIMARY KEY,
-    type VARCHAR(50),
-    title VARCHAR(255),
-    date_added_day VARCHAR(10),
-    date_added_year INT,
-    release_year INT,
-    rating VARCHAR(50),
-    duration VARCHAR(50),
-    seasons INT,
-    description TEXT
-);
-
--- Create the Directors dimension table
-CREATE TABLE directors (
-    director_id INT AUTO_INCREMENT PRIMARY KEY,
-    director_name VARCHAR(255) UNIQUE NOT NULL
-);
-
--- Create the Cast Members dimension table
-CREATE TABLE cast_members (
-    cast_member_id INT AUTO_INCREMENT PRIMARY KEY,
-    cast_member_name VARCHAR(255) UNIQUE NOT NULL
-);
-
--- Create the Countries dimension table
-CREATE TABLE countries (
-    country_id INT AUTO_INCREMENT PRIMARY KEY,
-    country_name VARCHAR(255) UNIQUE NOT NULL
-);
-
--- Create the Genres dimension table
-CREATE TABLE genres (
-    genre_id INT AUTO_INCREMENT PRIMARY KEY,
-    genre_name VARCHAR(255) UNIQUE NOT NULL
-);
-
--- Fact table for Shows to Directors (Many-to-Many)
-CREATE TABLE show_directors (
-    show_id VARCHAR(255),
-    director_id INT,
-    PRIMARY KEY (show_id, director_id),
-    FOREIGN KEY (show_id) REFERENCES shows(show_id) ON DELETE CASCADE,
-    FOREIGN KEY (director_id) REFERENCES directors(director_id) ON DELETE CASCADE
-);
-
--- Fact table for Shows to Cast Members (Many-to-Many)
-CREATE TABLE show_cast_members (
-    show_id VARCHAR(255),
-    cast_member_id INT,
-    PRIMARY KEY (show_id, cast_member_id),
-    FOREIGN KEY (show_id) REFERENCES shows(show_id) ON DELETE CASCADE,
-    FOREIGN KEY (cast_member_id) REFERENCES cast_members(cast_member_id) ON DELETE CASCADE
-);
-
--- Fact table for Shows to Countries (Many-to-Many)
-CREATE TABLE show_countries (
-    show_id VARCHAR(255),
-    country_id INT,
-    PRIMARY KEY (show_id, country_id),
-    FOREIGN KEY (show_id) REFERENCES shows(show_id) ON DELETE CASCADE,
-    FOREIGN KEY (country_id) REFERENCES countries(country_id) ON DELETE CASCADE
-);
-
--- Fact table for Shows to Genres (Many-to-Many)
-CREATE TABLE show_genres (
-    show_id VARCHAR(255),
-    genre_id INT,
-    PRIMARY KEY (show_id, genre_id),
-    FOREIGN KEY (show_id) REFERENCES shows(show_id) ON DELETE CASCADE,
-    FOREIGN KEY (genre_id) REFERENCES genres(genre_id) ON DELETE CASCADE
-);
-
 Schema Visualization (ERD):
 
 (Add a brief caption for the ERD, e.g., "Entity-Relationship Diagram of the Normalized Netflix Database Schema")
 4. ETL (Extract, Transform, Load) Pipeline
 
-A Python script (test.py) automates the ETL process, loading data from netflix_shows_info.csv into the normalized MySQL database.
+A Python script (netflix-etl-mysql.py) automates the ETL process, loading data from netflix_shows_info.csv into the normalized MySQL database.
 
 Key Transformation Logic:
 
@@ -122,43 +46,9 @@ Key Transformation Logic:
 
     Error Handling & Transactions: Robust try-except blocks and commit/rollback ensure data consistency.
 
-Technologies Used:
-
-    Python: ETL scripting.
-
-    mysql.connector: MySQL database interaction.
-
-    csv, re: CSV parsing and regex.
-
-Core ETL Script Logic (Conceptual Snippets):
-(Note: These are conceptual snippets. In your actual README.md, embed well-commented, concise code blocks from your test.py that illustrate these specific points. Do not paste the entire script.)
-
-# Example: Database and table creation logic (from create_database_and_tables function)
-# ...
-
-# Example: get_or_create_id helper function
-def get_or_create_id(cursor, table_name, name_column, name_value):
-    # ...
-
-# Example: Main ETL loop (from etl_process function)
-# ...
-for i, row in enumerate(reader):
-    # ... (data extraction and cleaning) ...
-    # Insert into main 'shows' table
-    # ...
-    # Process directors (similar for cast, countries, genres)
-    if directors_str:
-        for director_name in directors_str.split(','):
-            d_name = director_name.strip()
-            if d_name:
-                director_id = get_or_create_id(cursor, 'directors', 'director_name', d_name)
-                # Insert into fact table
-                # ...
-# ...
-
 5. Data Analysis & Querying
 
-The normalized database schema simplifies complex analytical queries.
+Simple test query
 Query 1: Count of Movies Released Between 1991 and 2000
 
 Question: How many movies were released between 1991 and 2000 (inclusive) on Netflix?
@@ -171,6 +61,7 @@ WHERE
     (release_year BETWEEN 1991 AND 2000) AND type = 'Movie';
 
 (Insert screenshot of Query 1 results here)
+The normalized database schema simplifies complex analytical queries.
 Query 2: TV Shows with the Maximum Number of Seasons
 
 Question: Show the title, associated countries, listed genres, and seasons for TV shows that ran the longest (i.e., have the most seasons).
@@ -273,4 +164,4 @@ Challenges Faced & Solutions:
 
     Data Format: CSV
 
-    Database Tools: MySQL Workbench (for schema visualization), (Optional: dbdiagram.io)
+    Database Tools: MySQL Workbench (for schema visualization).
