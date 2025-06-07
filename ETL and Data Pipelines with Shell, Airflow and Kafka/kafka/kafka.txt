@@ -1,4 +1,0 @@
-cd kafka_2.12-2.8.0
-bin/zookeeper-server-start.sh config/zookeeper.properties
-bin/kafka-server-start.sh config/server.properties
-bin/kafka-topics.sh --bootstrap-server localhost:9092 --create --topic toll
