@@ -7,8 +7,8 @@ try:
         # Establish a connection to the MySQL database
         mysql_connection = mysql.connector.connect(
            user="root",
-           password="jiXGz3ryXu5eCFyAE9Zr1MQ2",
-           host="172.21.34.90",
+           password="",
+           host="",
            database="sales"
         )
        
@@ -19,9 +19,9 @@ except mysql.connector.Error as error:
 try:
    postgresql_connection = psycopg2.connect(
             user="postgres",
-            password="MjU1NDUtdmljYWJv",
-            host="127.0.0.1",
-            port="5432",
+            password="",
+            host="",
+            port="",
             database="sales"
         )     
 
