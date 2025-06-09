@@ -42,6 +42,11 @@ This project implements an ETL (Extract, Transform, Load) pipeline using SSIS to
 - **Currency Conversion:**  
   Calculates and stores transaction amounts in both original and USD values.
 
+## Deployment & Scheduling
+
+- The project is deployed to a Microsoft SQL Server (MSSQL) instance.
+- An automated SQL Server Agent job is created to execute and schedule the ETL process, enabling regular and hands-free data warehouse updates.
+
 ## Technologies Used
 
 - SQL Server Integration Services (SSIS)
@@ -53,7 +58,6 @@ This project implements an ETL (Extract, Transform, Load) pipeline using SSIS to
 
 1. Open `Financial Datawarehouse ETL.sln` in Visual Studio or SSDT.
 2. Configure database connections and any required environment variables.
-3. Deploy the SSIS packages to your server.
-4. Execute the packages to extract, transform, and load data into the warehouse.
-
-
+3. Deploy the SSIS packages to your SQL Server.
+4. Set up a SQL Server Agent Job to schedule and automate the ETL process.
+5. Execute the job or run packages manually to extract, transform, and load data into the warehouse.
