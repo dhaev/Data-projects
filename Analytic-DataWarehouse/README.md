@@ -1,7 +1,7 @@
 # Data Warehouse and Analytics Project
 
 Welcome to the **Data Warehouse and Analytics Project** repository! 🚀  
-This project demonstrates a comprehensive data warehousing and analytics solution, from building a data warehouse to generating actionable insights. Designed as a portfolio project using the following guides and tutorials from **Baraa Khatib Salkini**, also known as **Data With Baraa** which highlights industry best practices in data engineering and analytics.
+This project demonstrates a comprehensive data warehousing and analytics solution, from building a data warehouse to generating actionable insights. Designed as a portfolio project using the guides and tutorials from **Baraa Khatib Salkini**, also known as **Data With Baraa** which highlights industry best practices in data engineering and analytics.
 - ✅ **SQL Data Warehouse Project:** [Course Link](https://youtu.be/SSKVgrwhzus)
 - ✅ **SQL Exploratory Data Analysis Project:** [Course Link](https://youtu.be/SSKVgrwhzus)
 - ✅ **SQL Advanced Data Analysis Project:** [Course Link](https://youtu.be/SSKVgrwhzus) |
